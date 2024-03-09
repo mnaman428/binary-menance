@@ -1,0 +1,348 @@
+public class CollectionNotes {
+/*
+Collection Notes 
+------------------------------------------------------
+// List of List of String
+List<List<String>> listOfLists = new List<List<String>>();
+
+// Inner List 1 with Strings
+List<String> innerList1 = new List<String>{'Apple', 'Orange', 'Banana'};
+listOfLists.add(innerList1);
+
+// Inner List 2 with Strings
+List<String> innerList2 = new List<String>{'Cherry', 'Grapes', 'Peach'};
+listOfLists.add(innerList2);
+
+// Accessing values
+String fruit = listOfLists[0][1]; // Accessing 'Orange' from innerList1
+String peach = listOfLists[1][2]; // Accessing 'Peach' from innerList2
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+ List of List of String
+List<List<Object>> listOfLists = new List<List<Object>>();
+
+// Inner List 1 with Strings
+List<Object> innerList1 = new List<Object>{'Apple', 'Orange', 'Banana'};
+listOfLists.add(innerList1);
+
+// Inner List 2 with Map
+List<Object> innerList2 = new List<Object>();
+Map<String, Integer> fruitCount = new Map<String, Integer>{'Apple' => 5, 'Orange' => 3, 'Banana' => 2};
+innerList2.add(fruitCount);
+listOfLists.add(innerList2);
+
+// Accessing values
+String fruit = (String)listOfLists[0][1]; // Accessing 'Orange' from innerList1
+Integer bananaCount = ((Map<String, Integer>)listOfLists[1][0]).get('Banana'); // Accessing Banana count from innerList2
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+/ Outer Map
+Map<String, Map<String, Integer>> outerMap = new Map<String, Map<String, Integer>>();
+
+// Inner Map 1
+Map<String, Integer> innerMap1 = new Map<String, Integer>();
+innerMap1.put('A', 1);
+innerMap1.put('B', 2);
+
+// Inner Map 2
+Map<String, Integer> innerMap2 = new Map<String, Integer>();
+innerMap2.put('C', 3);
+innerMap2.put('D', 4);
+
+// Adding Inner Maps to Outer Map
+outerMap.put('First', innerMap1);
+outerMap.put('Second', innerMap2);
+
+// Accessing values
+Integer value = outerMap.get('First').get('B');
+--------------------------------------------------------------------------------------------------------------------------------------
+
+// Creating a Map of String and List of String
+Map<String, List<String>> stringListMap = new Map<String, List<String>>();
+
+// Adding values to the list
+List<String> fruits = new List<String>{'Apple', 'Orange'};
+stringListMap.put('Fruits', fruits);
+
+// Adding more values to the list
+if (stringListMap.containsKey('Fruits')) {
+    stringListMap.get('Fruits').add('Banana');
+    stringListMap.get('Fruits').add('Grapes');
+}
+
+// Accessing values using get method
+List<String> fruitList = stringListMap.get('Fruits');
+
+// Example Usage:
+System.debug('Map with List: ' + stringListMap);
+System.debug('Fruit List: ' + fruitList);
+
+-------------------------------------------------------------------------------------------------------------------------------------
+ // Creating a Map of Strings
+Map<String, String> bookMap = new Map<String, String>();
+
+// Method 1: containsKey
+Boolean containsKeyResult = bookMap.containsKey('ISBN-123');
+// This method checks if the map contains a specific key (ISBN) and returns true if found, false otherwise.
+
+// Method 2: get
+String titleForISBN123 = bookMap.get('ISBN-123');
+// This method retrieves the title associated with a specified ISBN. If the ISBN is not present, it returns null.
+
+// Method 3: put
+bookMap.put('ISBN-123', 'The Great Gatsby');
+// This method adds or updates a key-value pair in the map. If the ISBN already exists, the title is updated; otherwise, a new entry is added.
+
+// Method 4: getAll
+Map<String, String> allBooks = bookMap.getAll(new Set<String>{'ISBN-123', 'ISBN-456'});
+// This method retrieves a map containing titles for specified ISBNs from the original map.
+
+// Method 5: values
+List<String> allTitles = bookMap.values();
+// This method returns a list containing all the book titles present in the map.
+
+// Example Usage:
+System.debug('Contains ISBN-123: ' + containsKeyResult);
+System.debug('Title for ISBN-123: ' + titleForISBN123);
+System.debug('Map after put: ' + bookMap);
+System.debug('Titles for specified ISBNs: ' + allBooks);
+System.debug('All Book Titles: ' + allTitles);
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+list 
+ List<Integer> numbers = new List<Integer>();
+
+// Add elements to the list
+numbers.add(1);
+numbers.add(2);
+numbers.add(3);
+
+// Specify the index you want to access
+Integer indexToAccess = 10;
+
+// Check if the index is within the bounds of the list
+if (indexToAccess >= 0 && indexToAccess < numbers.size()) {
+    // Access the element if the index is valid
+    Integer validNumber = numbers[indexToAccess];
+    System.debug('Valid number: ' + validNumber);
+} else {
+    // Handle the case where the index is out of bounds
+    System.debug('Index out of bounds: ' + indexToAccess);
+}
+
+
+---------------------------------------------------------------------------------------------------
+
+
+---------------------------------------------------------------------------------------------------
+Polymorphic Relationships in SOQL Queries
+
+List<Event> events = [SELECT TYPEOF What WHEN Account THEN Phone WHEN Opportunity THEN Amount END FROM Event];
+
+List<Event> events = [SELECT Description FROM Event WHERE What.Type IN ('Account', 'Opportunity')];
+
+---------------------------------------------------------------------------------------------------Set to List:
+
+Set<String> stringSet = new Set<String>{'apple', 'banana', 'orange'};
+List<String> stringList = new List<String>(stringSet);
+
+// Now 'stringList' contains the elements of the 'stringSet'
+
+
+List to Set:
+
+List<Integer> intList = new List<Integer>{1, 2, 3, 4, 5};
+Set<Integer> intSet = new Set<Integer>(intList);
+
+// Now 'intSet' contains the elements of the 'intList'
+
+String to Integer:
+
+String strNumber = '123';
+Integer intNumber = Integer.valueOf(strNumber);
+
+// Now 'intNumber' is an Integer with the value 123
+
+
+Integer to String:
+
+Integer intNumber = 456;
+String strNumber = String.valueOf(intNumber);
+
+// Now 'strNumber' is a String with the value "456"
+
+
+String to Boolean:
+
+String strBoolean = 'true';
+Boolean boolValue = Boolean.valueOf(strBoolean);
+
+// Now 'boolValue' is a Boolean with the value true
+
+Boolean to String:
+
+Boolean boolValue = false;
+String strBoolean = String.valueOf(boolValue);
+
+// Now 'strBoolean' is a String with the value "false"
+
+
+String to Date:
+
+String strDate = '2024-01-11';
+Date myDate = Date.valueOf(strDate);
+
+// Now 'myDate' is a Date object parsed from the string
+------------------------------------------------------------------------------------------------
+List Methods:
+1 Add
+List<Integer> numbers = new List<Integer>{1, 2, 3};
+numbers.add(4);
+
+2.addatindex
+
+List<String> names = new List<String>{'Alice', 'Bob', 'Charlie'};
+names.add(1, 'David'); // Adds 'David' at index 1
+
+3. addall
+List<String> list1 = new List<String>{'apple', 'banana'};
+List<String> list2 = new List<String>{'orange', 'grape'};
+list1.addAll(list2); // Adds all elements of list2 to list1
+
+4. clear:
+Removes all elements from the list.
+
+
+List<Boolean> flags = new List<Boolean>{true, false, true};
+flags.clear(); // Clears all elements
+
+5  clone:
+Creates a shallow copy of the list.
+
+
+List<Integer> original = new List<Integer>{1, 2, 3};
+List<Integer> copy = original.clone(); // Creates a copy of the origin
+
+6.contains:
+Checks if the list contains a specific element.
+
+List<String> fruits = new List<String>{'apple', 'banana', 'orange'};
+Boolean hasApple = fruits.contains('apple'); // Returns true
+
+7. size:
+Returns the number of elements in the list.
+
+
+List<Double> values = new List<Double>{1.5, 2.0, 3.7};
+Integer count = values.size(); // Returns 3
+
+8.equals:
+Checks if two lists are equal.
+
+
+List<Integer> listA = new List<Integer>{1, 2, 3};
+List<Integer> listB = new List<Integer>{1, 2, 3};
+Boolean isEqual = listA.equals(listB); // Returns true
+
+9.isEmpty:
+Checks if the list is empty.
+
+List<String> names = new List<String>();
+Boolean isEmpty = names.isEmpty(); // Returns true
+
+10 remove:
+Removes the first occurrence of a specific element from the list.
+
+List<String> colors = new List<String>{'red', 'green', 'blue'};
+colors.remove('green'); // Removes 'green' from the list
+
+11. sort:
+Sorts the elements in the list.
+
+List<Integer> numbers = new List<Integer>{3, 1, 4, 1, 5, 9, 2};
+numbers.sort(); // Sorts the list in ascending order
+
+12.toString:
+Returns a string representation of the list.
+
+List<Boolean> flags = new List<Boolean>{true, false, true};
+String strRepresentation = flags.toString(); // Returns a string like
+
+-----------------------------------------------------------------------------------------------
+
+Set Methods:
+1. add:
+Adds an element to the set.
+
+
+Set<String> colors = new Set<String>{'red', 'green', 'blue'};
+colors.add('yellow');
+
+2.addAll:
+Adds all elements from another collection to the set.
+
+Set<Integer> set1 = new Set<Integer>{1, 2, 3};
+Set<Integer> set2 = new Set<Integer>{3, 4, 5};
+set1.addAll(set2); // Adds all elements of set2 to set1
+
+3. clear:
+Removes all elements from the set.
+
+Set<Double> values = new Set<Double>{1.5, 2.0, 3.7};
+values.clear(); // Clears all elements
+
+4.clone:
+Creates a shallow copy of the set.
+
+Set<String> original = new Set<String>{'apple', 'banana', 'orange'};
+Set<String> copy = original.clone(); // Creates a copy of the original set
+
+5.contains:
+Checks if the set contains a specific element.
+
+Set<String> fruits = new Set<String>{'apple', 'banana', 'orange'};
+Boolean hasApple = fruits.contains('apple'); // Returns true
+
+6. size:
+Returns the number of elements in the set.
+
+Set<Integer> numbers = new Set<Integer>{1, 2, 3};
+Integer count = numbers.size(); // Returns 3
+
+7.equals:
+Checks if two sets are equal.
+
+Set<Integer> setA = new Set<Integer>{1, 2, 3};
+Set<Integer> setB = new Set<Integer>{1, 2, 3};
+Boolean isEqual = setA.equals(setB); // Returns true
+
+8. isEmpty:
+Checks if the set is empty.
+
+Set<String> names = new Set<String>();
+Boolean isEmpty = names.isEmpty(); // Returns true
+
+9.remove:
+Removes a specific element from the set.
+
+Set<String> animals = new Set<String>{'cat', 'dog', 'fish'};
+animals.remove('dog'); // Removes 'dog' from the set
+
+10.toString:
+Returns a string representation of the set.
+
+Set<Boolean> flags = new Set<Boolean>{true, false, true};
+String strRepresentation = flags.toString(); // Returns a string like
+
+--------------------------------------------------------------------------------------------
+
+*/
+}
